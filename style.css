@@ -12,6 +12,7 @@
   align-items: center;
   height: 100vh;
 }
+
 #start-page,
 #quiz-page,
 #alternatives,
@@ -26,33 +27,61 @@
 #start-page p {
   font-size: 1.5rem;
 }
+
 .title {
   font-size: 3rem;
 }
-.sports,
-.general-knowledge,
-.alternative,
-#next,
-#restart {
+
+button {
   background-color: rgb(85, 205, 85);
   font-size: 1.2rem;
   padding: 5px;
   width: 200px;
   height: 50px;
   border: solid 2px white;
+  cursor: pointer;
+}
+button.alternative {
+  background-color: rgb(85, 205, 85);
+  font-size: 1.2rem;
+  padding: 10px;
+  width: 200px;
+  height: auto;
+  border: solid 2px white;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+button.alternative:hover {
+  background-color: rgb(146, 232, 146);
+  transition: 0.5s;
+}
+
+button.alternative {
+  overflow-wrap: break-word;
+}
+
+button:hover {
+  background-color: rgb(146, 232, 146);
+  transition: 0.5s;
 }
 
 #next {
-  margin-top: 20px;
-}
-#alternatives,
-#next {
   display: none;
+  justify-content: center;
+  align-items: center;
 }
-.sports:hover,
-.general-knowledge:hover,
-.alternative:hover,
-#next:hover {
-  background-color: rgb(146, 232, 146);
-  transition: 0.5s;
+#question {
+  padding: 0 10px;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  #start-page p {
+    font-size: 1.2rem;
+  }
 }
