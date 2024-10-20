@@ -1,6 +1,9 @@
 let currentQuestion = 0;
 let score = 0;
 let randomizer = [];
+let timePerQuestion = 15;
+let timeLeft;
+let timerInterval;
 
 function start(subject) {
   fetchQuestions(subject).then(() => {
@@ -58,9 +61,31 @@ function showQuestion() {
   });
 
   document.getElementById("next").style.display = "none";
+
+  startTimer();
+}
+
+function startTimer() {
+  timeLeft = timePerQuestion;
+  document.getElementById("time").textContent = timeLeft;
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time").textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timeExpired();
+    }
+  }, 1000);
+}
+
+function timeExpired() {
+  next();
 }
 
 function answer(alternative) {
+  clearInterval(timerInterval);
   const question = randomizer[currentQuestion];
   const options = document.querySelectorAll(".alternative");
 
@@ -74,6 +99,7 @@ function answer(alternative) {
 }
 
 function next() {
+  clearInterval(timerInterval);
   currentQuestion++;
   if (currentQuestion < randomizer.length) {
     showQuestion();
@@ -83,6 +109,7 @@ function next() {
 }
 
 function result() {
+  clearInterval(timerInterval);
   document.getElementById("quiz-page").style.display = "none";
   document.getElementById("result").style.display = "flex";
   document.getElementById(
@@ -93,4 +120,5 @@ function result() {
 function restart() {
   document.getElementById("result").style.display = "none";
   document.getElementById("start-page").style.display = "flex";
+  clearInterval(timerInterval);
 }
